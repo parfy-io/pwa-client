@@ -1,0 +1,21 @@
+{
+  "common": {
+    "error": "Error",
+    "alert": "Warning",
+    "success": "Success",
+    "info": "Information",
+    "form": {
+      "validation": {
+        "required": "This field is mandatory!"
+      }
+    }
+  },
+  "login": {
+    "title": "Login",
+    "mqttBroker": "MQTT-Broker",
+    "clientId": "Client-ID",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login"
+  }
+}
