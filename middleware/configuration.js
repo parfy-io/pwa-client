@@ -3,4 +3,8 @@ export default function ({ isHMR, app, store, route, params, error, redirect }) 
   if(!store.getters['mqtt/hasValidConfiguration'] && route.path !== '/') {
     redirect('/')
   }
+
+  if(store.getters['mqtt/hasValidConfiguration'] && route.path === '/') {
+    redirect('/home/')
+  }
 }

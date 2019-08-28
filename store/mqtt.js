@@ -11,6 +11,10 @@ export const mutations = {
     state.clientId = clientId
     state.username = username
     state.password = password
+
+    this.$localStore.setMqttSettings({
+      broker, clientId, username, password
+    })
   }
 }
 
@@ -23,9 +27,21 @@ export const getters = {
   }
 }
 
+const actions = {
+  init(ctx) {
+    return this.$localStore.getMqttSettings()
+      .then(settings => {
+        if(settings){
+          return ctx.commit('saveConfiguration', settings)
+        }
+      })
+  }
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
-  getters
+  getters,
+  actions
 }

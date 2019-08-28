@@ -49,6 +49,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/localStore',
+    '~/plugins/webworker',
+    '~/plugins/init',
     '~/plugins/style',
     '~/plugins/i18n',
   ],
@@ -102,6 +105,10 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      /*
+      * Required for HotModuleReloading to work with web-worker
+      */
+      config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`
     }
   }
 }

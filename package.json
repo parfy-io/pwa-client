@@ -14,9 +14,12 @@
     "@mdi/font": "^4.2.95",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "localforage": "^1.7.3",
+    "material-design-icons-iconfont": "^5.0.1",
     "nuxt": "^2.9.1",
     "vue-i18n": "^8.14.0",
-    "vue-web-cam": "^1.6.0"
+    "vue-web-cam": "^1.6.0",
+    "workerize-loader": "^1.1.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.4.0"
