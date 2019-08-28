@@ -10,6 +10,13 @@
       }
     }
   },
+  "component":{
+    "camera": {
+      "settings": {
+        "device": "Kamera"
+      }
+    }
+  },
   "login": {
     "title": "Anmeldung",
     "mqttBroker": "MQTT-Broker",
