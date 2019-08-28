@@ -23,6 +23,9 @@
     "clientId": "Client-ID",
     "username": "Username",
     "password": "Password",
-    "submit": "Login"
+    "submit": "Login",
+    "error": {
+      "connection": "Could not establish connection. Please check your settings."
+    }
   }
 }

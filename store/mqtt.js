@@ -21,9 +21,7 @@ export const mutations = {
 export const getters = {
   hasValidConfiguration(state) {
     return state.broker !== "" &&
-      state.clientId !== "" &&
-      state.username !== "" &&
-      state.password !== "";
+      state.clientId !== ""
   }
 }
 
@@ -32,9 +30,13 @@ const actions = {
     return this.$localStore.getMqttSettings()
       .then(settings => {
         if(settings){
-          return ctx.commit('saveConfiguration', settings)
+          return ctx.dispatch('applyConfiguration', settings)
         }
       })
+  },
+  applyConfiguration(ctx, cfg) {
+    return this.$webworker.mqttWorker.connnect(cfg.broker, cfg.clientId, cfg.username, cfg.password)
+      .then(() => ctx.commit('saveConfiguration', cfg))
   }
 }
 

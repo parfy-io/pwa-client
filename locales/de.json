@@ -23,6 +23,9 @@
     "clientId": "Mandanten-ID",
     "username": "Benutzername",
     "password": "Passwort",
-    "submit": "Anmelden"
+    "submit": "Anmelden",
+    "error": {
+      "connection": "Es konnte keine Verbindung hergestellt werden. Bitte prüfen Sie die Einstellungen."
+    }
   }
 }

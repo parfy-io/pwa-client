@@ -16,6 +16,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "localforage": "^1.7.3",
     "material-design-icons-iconfont": "^5.0.1",
+    "mqtt": "^3.0.0",
     "nuxt": "^2.9.1",
     "vue-i18n": "^8.14.0",
     "vue-web-cam": "^1.6.0",
