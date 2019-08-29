@@ -38,11 +38,16 @@
       app
     >
       <span class="white--text">&copy; 2019</span>
+      <div class="flex-grow-1"></div>
+      <v-icon v-if="mqttConnected">wifi</v-icon>
+      <v-icon v-else>wifi_off</v-icon>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
   export default {
     props: {
       source: String,
@@ -50,5 +55,10 @@
     data: () => ({
       drawer: null,
     }),
+    computed: {
+      ...mapState({
+        mqttConnected: state => state.mqtt.connected,
+      }),
+    }
   }
 </script>

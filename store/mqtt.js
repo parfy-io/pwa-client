@@ -2,7 +2,8 @@ export const state = () => ({
   broker: '',
   clientId: '',
   username: '',
-  password: ''
+  password: '',
+  connected: false,
 })
 
 export const mutations = {
@@ -15,6 +16,9 @@ export const mutations = {
     this.$localStore.setMqttSettings({
       broker, clientId, username, password
     })
+  },
+  setConnectionState(state, connected) {
+    state.connected = connected
   }
 }
 

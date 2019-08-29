@@ -2,6 +2,13 @@ import mqtt from 'mqtt'
 
 let client = null
 
+const fireEvent = function(data){
+  self.postMessage({
+    type: 'mqtt-webworker', //only this types will be received by our custom event handler (see plugins/webworker)
+    data: data,
+  })
+}
+
 export function tryConnection(broker, clientId, username, password) {
   return new Promise((resolve, reject) => {
     try {
@@ -40,7 +47,16 @@ export function connnect(broker, clientId, username, password) {
   })
 
   client.on('connect', function () {
-    console.log('mqtt connection established')
+    fireEvent({
+      type: 'connect',
+      value: true
+    })
+  })
+  client.on('disconnect', function () {
+    fireEvent({
+      type: 'connect',
+      value: false
+    })
   })
 
   client.on('message', function (topic, message) {

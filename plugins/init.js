@@ -1,5 +1,8 @@
 //init stuff here
 
 export default function ({app, store}) {
-  return store.dispatch('mqtt/init');
+  return Promise.all([
+    store.dispatch('mqtt/init'),
+    store.dispatch('webworker/init')
+  ]);
 }
