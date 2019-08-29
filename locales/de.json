@@ -27,5 +27,9 @@
     "error": {
       "connection": "Es konnte keine Verbindung hergestellt werden. Bitte prüfen Sie die Einstellungen."
     }
+  },
+  "recognize": {
+    "success": "Das Bild wurde erfolgreich hochgeladen.",
+    "fail": "Das Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es später erneut!"
   }
 }

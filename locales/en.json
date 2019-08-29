@@ -27,5 +27,9 @@
     "error": {
       "connection": "Could not establish connection. Please check your settings."
     }
+  },
+  "recognize": {
+    "success": "Successful upload the picture.",
+    "fail": "Failed to upload the picture. Please try it later again!"
   }
 }

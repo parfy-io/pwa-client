@@ -1,8 +1,10 @@
 import mqtt from 'mqtt'
+import dataUriToBuffer from 'data-uri-to-buffer'
 
 let client = null
+let currentClientId = null
 
-const fireEvent = function(data){
+const fireEvent = function (data) {
   self.postMessage({
     type: 'mqtt-webworker', //only this types will be received by our custom event handler (see plugins/webworker)
     data: data,
@@ -18,15 +20,17 @@ export function tryConnection(broker, clientId, username, password) {
       })
 
       tempClient.on('connect', () => {
-        try{
+        try {
           tempClient.end(true)
-        }catch (e) {}
+        } catch (e) {
+        }
         resolve()
       })
       tempClient.on('reconnect', () => {
-        try{
+        try {
           tempClient.end(true)
-        }catch (e) {}
+        } catch (e) {
+        }
         reject('timeout')
       })
     } catch (e) {
@@ -36,6 +40,8 @@ export function tryConnection(broker, clientId, username, password) {
 }
 
 export function connnect(broker, clientId, username, password) {
+  currentClientId = clientId
+
   if (client) {
     //shutdown the old client
     client.end()
@@ -46,29 +52,58 @@ export function connnect(broker, clientId, username, password) {
     password: password
   })
 
-  client.on('connect', function () {
+  client.on('connect', () => {
     fireEvent({
       type: 'connect',
       value: true
     })
-  })
-  client.on('disconnect', function () {
-    fireEvent({
-      type: 'connect',
-      value: false
+
+    const statusTopic = process.env.mqtt.topic.status.replace("__CLIENT_ID__", clientId);
+    client.subscribe(statusTopic, (err) => {
+      if(err) {
+        fireEvent({
+          type: 'error',
+          value: err
+        })
+      }
     })
   })
 
+  client.on('disconnect', () => fireEvent({
+      type: 'connect',
+      value: false
+    })
+  )
+  client.on('offline', () => fireEvent({
+      type: 'connect',
+      value: false
+    })
+  )
+
   client.on('message', function (topic, message) {
-    // message is Buffer
-    console.log(message.toString())
+    const splitTopic = topic.split('/')
+    const correlationId = splitTopic[splitTopic.length - 1]
+
+    fireEvent({
+      type: 'status',
+      value: {
+        correlationId: correlationId,
+        message: JSON.parse(message.toString())
+      }
+    })
   })
 
-  client.on('error', function (error) {
-    console.log(error)
-  })
+  client.on('error', (error) => fireEvent({
+      type: 'error',
+      value: error
+    })
+  )
 }
 
-export function mqttPing() {
-  console.log("Hello from WebWorker")
+export function sendImage(image, correlationId) {
+  const topic = process.env.mqtt.topic.out
+    .replace('__CLIENT_ID__', currentClientId)
+    .replace('__CORRELATION_ID__', correlationId)
+
+  client.publish(topic, dataUriToBuffer(image))
 }

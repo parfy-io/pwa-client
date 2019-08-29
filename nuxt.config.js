@@ -2,6 +2,16 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   mode: 'spa',
+
+  env: {
+    mqtt: {
+      topic: {
+        out: process.env.MQTT_TOPIC_OUT || 'recognize/__CLIENT_ID__/__CORRELATION_ID__',
+        status: process.env.MQTT_TOPIC_STATUS || 'status/__CLIENT_ID__/+'
+      }
+    }
+  },
+
   /*
   ** Headers of the page
   */

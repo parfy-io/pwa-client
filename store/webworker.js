@@ -18,8 +18,13 @@ const actions = {
   addEvent(ctx, event) {
     ctx.commit('addEvent', event)
 
-    if(event.type === 'connect'){
-      ctx.commit('mqtt/setConnectionState', event.value, {root: true})
+    switch(event.type){
+      case 'connect':
+        ctx.commit('mqtt/setConnectionState', event.value, {root: true})
+        break
+      case 'status':
+        ctx.commit('recognition/addRecognitionStatus', event.value, {root: true})
+        break
     }
   }
 }
