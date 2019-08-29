@@ -5,12 +5,12 @@
       app
     >
       <v-list dense>
-        <v-list-item @click="">
+        <v-list-item v-for="link in links" :key="link.route" router :to="link.route">
           <v-list-item-action>
-            <v-icon>home</v-icon>
+            <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>{{ $t(link.text) }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -54,6 +54,10 @@
     },
     data: () => ({
       drawer: null,
+      links: [
+        { icon: 'home', text: 'navigation.home', route: '/home/' },
+        { icon: 'perm_media', text: 'navigation.status', route: '/status/' },
+      ]
     }),
     computed: {
       ...mapState({

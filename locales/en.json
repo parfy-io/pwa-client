@@ -17,6 +17,10 @@
       }
     }
   },
+  "navigation": {
+    "home": "Home",
+    "status": "Status"
+  },
   "login": {
     "title": "Login",
     "mqttBroker": "MQTT-Broker",
@@ -30,6 +34,12 @@
   },
   "recognize": {
     "success": "Successful upload the picture.",
-    "fail": "Failed to upload the picture. Please try it later again!"
+    "fail": "Failed to upload the picture. Please try it later again!",
+    "status": {
+      "uploaded": "Uploaded",
+      "recognized": "Text recognition",
+      "found": "Person recognition",
+      "notified": "Notification"
+    }
   }
 }

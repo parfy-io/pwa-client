@@ -15,7 +15,7 @@
         </v-btn>
       </v-snackbar>
       <v-snackbar v-model="imageUploadFail" color="error" class="text-center">
-        {{$t('recognize.error')}}
+        {{$t('recognize.fail')}}
         <v-btn text @click="imageUploadFail = false" >
           <v-icon>close</v-icon>
         </v-btn>

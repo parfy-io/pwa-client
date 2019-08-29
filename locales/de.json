@@ -17,6 +17,10 @@
       }
     }
   },
+  "navigation": {
+    "home": "Start",
+    "status": "Status"
+  },
   "login": {
     "title": "Anmeldung",
     "mqttBroker": "MQTT-Broker",
@@ -30,6 +34,12 @@
   },
   "recognize": {
     "success": "Das Bild wurde erfolgreich hochgeladen.",
-    "fail": "Das Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es später erneut!"
+    "fail": "Das Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es später erneut!",
+    "status": {
+      "uploaded": "Hochgeladen",
+      "recognized": "Texterkennung",
+      "found": "Personerkennung",
+      "notified": "Benarichtigung"
+    }
   }
 }
