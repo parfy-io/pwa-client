@@ -23,6 +23,12 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Parfy.io</v-toolbar-title>
+
+      <div class="flex-grow-1"></div>
+      <v-system-bar color="indigo" class="pa-0">
+        <v-icon v-if="mqttConnected">wifi</v-icon>
+        <v-icon v-else>wifi_off</v-icon>
+      </v-system-bar>
     </v-app-bar>
 
     <v-content>
@@ -33,15 +39,6 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer
-      color="indigo"
-      app
-    >
-      <span class="white--text">&copy; 2019</span>
-      <div class="flex-grow-1"></div>
-      <v-icon v-if="mqttConnected">wifi</v-icon>
-      <v-icon v-else>wifi_off</v-icon>
-    </v-footer>
   </v-app>
 </template>
 

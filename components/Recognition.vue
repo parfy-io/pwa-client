@@ -56,7 +56,7 @@
       },
       uploaded: {
         required: true,
-        default: true
+        default: 'done'
       },
       recognized: {
         required: true,
@@ -73,23 +73,27 @@
     },
     computed: {
       uploadedClass(){
-        if(this.uploaded === true) return 'success'
-        if(this.uploaded === false) return 'error'
+        if(this.uploaded === 'start') return 'info'
+        if(this.uploaded === 'done') return 'success'
+        if(this.uploaded === 'fail') return 'error'
         return ''
       },
       recognizedClass(){
-        if(this.recognized === true) return 'success'
-        if(this.recognized === false) return 'error'
+        if(this.recognized === 'start') return 'info'
+        if(this.recognized === 'done') return 'success'
+        if(this.recognized === 'fail') return 'error'
         return ''
       },
       foundClass(){
-        if(this.found === true) return 'success'
-        if(this.found === false) return 'error'
+        if(this.found === 'start') return 'info'
+        if(this.found === 'done') return 'success'
+        if(this.found === 'fail') return 'error'
         return ''
       },
       notifiedClass(){
-        if(this.notified === true) return 'success'
-        if(this.notified === false) return 'error'
+        if(this.notified === 'start') return 'info'
+        if(this.notified === 'done') return 'success'
+        if(this.notified === 'fail') return 'error'
         return ''
       },
     }

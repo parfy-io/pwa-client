@@ -40,6 +40,10 @@
       "recognized": "Texterkennung",
       "found": "Personerkennung",
       "notified": "Benarichtigung"
+    },
+    "filter": {
+      "fail": "Fehlgeschlagene",
+      "completed": "Abgeschlossene"
     }
   }
 }

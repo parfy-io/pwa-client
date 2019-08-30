@@ -40,6 +40,10 @@
       "recognized": "Text recognition",
       "found": "Person recognition",
       "notified": "Notification"
+    },
+    "filter": {
+      "fail": "Fail",
+      "completed": "Completed"
     }
   }
 }
