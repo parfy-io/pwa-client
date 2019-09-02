@@ -61,9 +61,9 @@ export default {
   plugins: [
     '~/plugins/localStore',
     '~/plugins/webworker',
+    '~/plugins/i18n',
     '~/plugins/init',
     '~/plugins/style',
-    '~/plugins/i18n',
   ],
   /*
   ** Nuxt.js dev-modules

@@ -65,6 +65,16 @@
     "saved": "The configuration was saved successfully.",
     "mqtt": {
       "title": "MQTT-Settings"
+    },
+    "others": {
+      "title": "Others",
+      "language": {
+        "title": "Language",
+        "codes":{
+          "de": "Deutsch",
+          "en": "English"
+        }
+      }
     }
   }
 }

@@ -19,6 +19,12 @@ export function newLocalStore() {
     },
     setMqttSettings(settings){
       return store.settings.setItem("mqtt", settings)
+    },
+    getLanguage(){
+      return store.settings.getItem('language')
+    },
+    setLanguage(lang){
+      return store.settings.setItem('language', lang)
     }
   }
 }

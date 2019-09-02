@@ -13,7 +13,7 @@
           </v-toolbar>
           <v-card-text>
 
-            <LoginForm :form-id="form.id"
+            <LoginForm :form-id="mqtt.formId"
                        :data="mqttConfiguration"
                        @submit="onSaveMqttSettings"
                        @validationChange="onValidationChange"
@@ -22,8 +22,31 @@
           </v-card-text>
         </v-card>
       </v-col>
+      <v-col cols="12" sm="8" md="4" >
+
+        <v-card class="elevation-12">
+          <v-toolbar
+            color="primary"
+            flat
+          >
+            <v-toolbar-title>{{$t('settings.others.title')}}</v-toolbar-title>
+            <div class="flex-grow-1"></div>
+          </v-toolbar>
+          <v-card-text>
+            <v-select
+              :items="localeOptions"
+              :value="locale"
+              item-text="label"
+              item-value="value"
+              prepend-icon="language"
+              :label="$t('settings.others.language.title')"
+              @change="onLanguageChange"
+            ></v-select>
+          </v-card-text>
+        </v-card>
+      </v-col>
       <v-col>
-        <v-btn block color="primary" type="submit" :form="form.id" :disabled="!form.valid || tryConnect" :loading="tryConnect">
+        <v-btn block color="primary" type="submit" :form="mqtt.formId" :disabled="!mqtt.valid || mqtt.tryConnect" :loading="mqtt.tryConnect">
           <v-icon>delete</v-icon>
           {{$t('settings.save')}}
         </v-btn>
@@ -40,7 +63,7 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapActions, mapGetters, mapState } from 'vuex';
   import LoginForm from "../../components/LoginForm";
 
   export default {
@@ -49,27 +72,36 @@
       LoginForm
     },
     data: () => ({
-      form: {
-        id: 'settings-mqtt-form',
+      mqtt: {
+        formId: 'settings-mqtt-form',
         valid: false,
+        tryConnect: false,
       },
-      tryConnect: false,
+      language: null,
       saved: false
     }),
     computed: {
       ...mapGetters({
         mqttConfiguration: 'mqtt/getConfiguration'
       }),
+      ...mapState({
+        locale: state => state.i18n.locale,
+        locales: state => state.i18n.locales,
+      }),
+      localeOptions(){
+        return this.locales.map(l => ({value: l, label: this.$t('settings.others.language.codes.' + l)}))
+      }
     },
     methods: {
       ...mapActions({
-        applyConfiguration: 'mqtt/applyConfiguration'
+        applyConfiguration: 'mqtt/applyConfiguration',
+        applyLanguage: 'i18n/applyLanguage'
       }),
       onValidationChange(valid) {
-        this.form.valid = valid
+        this.mqtt.valid = valid
       },
       onTryConnect(tryConnect) {
-        this.tryConnect = tryConnect
+        this.mqtt.tryConnect = tryConnect
       },
       onSaveMqttSettings(data) {
         this.saved = false
@@ -79,7 +111,11 @@
           username: data.username,
           password: data.password,
         })
+        this.applyLanguage(this.language)
         this.saved = true
+      },
+      onLanguageChange(lang){
+        this.language = lang
       }
     },
   }
