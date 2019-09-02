@@ -24,7 +24,8 @@
   },
   "navigation": {
     "home": "Home",
-    "status": "Status"
+    "status": "Status",
+    "settings": "Settings"
   },
   "login": {
     "title": "Login",
@@ -56,6 +57,14 @@
         "text": "All",
         "confirmation": "Are you sure to delete all orders?"
       }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "save": "Save",
+    "saved": "The configuration was saved successfully.",
+    "mqtt": {
+      "title": "MQTT-Settings"
     }
   }
 }

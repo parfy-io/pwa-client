@@ -54,6 +54,7 @@
       links: [
         { icon: 'home', text: 'navigation.home', route: '/home/' },
         { icon: 'perm_media', text: 'navigation.status', route: '/status/' },
+        { icon: 'settings_applications', text: 'navigation.settings', route: '/settings/' },
       ]
     }),
     computed: {

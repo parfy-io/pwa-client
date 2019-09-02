@@ -24,7 +24,8 @@
   },
   "navigation": {
     "home": "Start",
-    "status": "Status"
+    "status": "Status",
+    "settings": "Einstellungen"
   },
   "login": {
     "title": "Anmeldung",
@@ -56,6 +57,14 @@
         "text": "Alle",
         "confirmation": "Sind Sie sicher, dass Sie alle Aufträge löschen wollen?"
       }
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "save": "Speichern",
+    "saved": "Die Einstellungen wurden erfolgreich gespeichert.",
+    "mqtt": {
+      "title": "MQTT-Einstellungen"
     }
   }
 }

@@ -26,6 +26,14 @@ export const getters = {
   hasValidConfiguration(state) {
     return state.broker !== "" &&
       state.clientId !== ""
+  },
+  getConfiguration(state){
+    return {
+      broker: state.broker,
+      clientId: state.clientId,
+      username: state.username,
+      password: state.password,
+    }
   }
 }
 

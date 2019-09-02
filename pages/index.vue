@@ -22,41 +22,11 @@
             <div class="flex-grow-1"></div>
           </v-toolbar>
           <v-card-text>
-            <v-form v-model="form.valid" @submit.prevent="login" id="login-form">
-              <v-text-field
-                :label="$t('login.mqttBroker')"
-                prepend-icon="cloud"
-                placeholder="mqtt://parfy.io:1833"
-                type="text"
-                v-model="form.broker"
-                :rules="ruleRequired"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                :label="$t('login.clientId')"
-                prepend-icon="domain"
-                type="text"
-                v-model="form.clientId"
-                :rules="ruleRequired"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                :label="$t('login.username')"
-                prepend-icon="person"
-                type="text"
-                v-model="form.username"
-              ></v-text-field>
-
-              <v-text-field
-                id="password"
-                :label="$t('login.password')"
-                prepend-icon="lock"
-                type="password"
-                v-model="form.password"
-              ></v-text-field>
-            </v-form>
+            <LoginForm form-id="login-form"
+                       @submit="onLogin"
+                       @validationChange="onValidationChange"
+                       @tryConnect="onTryConnect">
+            </LoginForm>
           </v-card-text>
           <v-card-actions>
             <div class="flex-grow-1"></div>
@@ -64,36 +34,23 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col>
-        <div class="text-center ma-2">
-          <v-snackbar v-model="connectionFailed" color="error" class="text-center">
-            {{$t('login.error.connection')}}
-            <v-btn text @click="connectionFailed = false" >
-              <v-icon>close</v-icon>
-            </v-btn>
-          </v-snackbar>
-        </div>
-      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import LoginForm from "../components/LoginForm";
 
 export default {
+  components: {LoginForm},
   props: {
     source: String,
   },
   data: () => ({
     form: {
-      broker: null,
-      clientId: null,
-      username: null,
-      password: null,
       valid: false
     },
-    connectionFailed: false,
     tryConnect: false,
   }),
   computed: {
@@ -107,26 +64,20 @@ export default {
     ...mapActions({
       applyConfiguration: 'mqtt/applyConfiguration'
     }),
-    login() {
-      if(!this.form.valid) return
-      this.connectionFailed = false
-      this.tryConnect = true
-
-      this.$webworker.mqttWorker.tryConnection(this.form.broker, this.form.clientId, this.form.username, this.form.password)
-        .then(() => {
-          this.tryConnect = false
-          this.applyConfiguration({
-            broker: this.form.broker,
-            clientId: this.form.clientId,
-            username: this.form.username,
-            password: this.form.password,
-          })
-          this.$router.push('/home/')
-        })
-        .catch(() => {
-          this.connectionFailed = true
-          this.tryConnect = false
-        })
+    onValidationChange(valid) {
+      this.form.valid = valid
+    },
+    onTryConnect(tryConnect) {
+      this.tryConnect = tryConnect
+    },
+    onLogin(data) {
+      this.applyConfiguration({
+        broker: data.broker,
+        clientId: data.clientId,
+        username: data.username,
+        password: data.password,
+      })
+      this.$router.push('/home/')
     }
   }
 }
