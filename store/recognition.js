@@ -18,10 +18,15 @@ export const mutations = {
       recognition = recognition[0]
       recognition.status.push(message)
     }
+  },
+  removeRecognition(state, correlationId) {
+    let index = state.recognitions.findIndex(r => r.correlationId === correlationId)
+    state.recognitions.splice(index, 1)
   }
 }
 
 export const getters = {
+
 }
 
 const actions = {

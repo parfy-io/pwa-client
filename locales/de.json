@@ -8,6 +8,11 @@
       "validation": {
         "required": "Dies ist ein Pflichtfeld!"
       }
+    },
+    "confirmation": {
+      "title": "Warnung",
+      "agree": "Ja",
+      "disagree": "Abbrechen"
     }
   },
   "component":{
@@ -44,6 +49,13 @@
     "filter": {
       "fail": "Fehlgeschlagene",
       "completed": "Abgeschlossene"
+    },
+    "delete": {
+      "completed": "Alle abgeschlossenen",
+      "all": {
+        "text": "Alle",
+        "confirmation": "Sind Sie sicher, dass Sie alle Aufträge löschen wollen?"
+      }
     }
   }
 }

@@ -8,6 +8,11 @@
       "validation": {
         "required": "This field is mandatory!"
       }
+    },
+    "confirmation": {
+      "title": "Warning",
+      "agree": "Yes",
+      "disagree": "Abort"
     }
   },
   "component":{
@@ -44,6 +49,13 @@
     "filter": {
       "fail": "Fail",
       "completed": "Completed"
+    },
+    "delete": {
+      "completed": "All completed",
+      "all": {
+        "text": "All",
+        "confirmation": "Are you sure to delete all orders?"
+      }
     }
   }
 }
