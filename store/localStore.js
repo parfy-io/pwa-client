@@ -44,7 +44,10 @@ export function newLocalStore() {
       return store.recognitionImages.setItem(id, image)
     },
     removeRecognition(id){
-      return store.recognitionImages.removeItem(id)
+      return Promise.all([
+        store.recognitionImages.removeItem(id),
+        store.recognitionStatus.removeItem(id)
+      ])
     },
     addRecognitionStatus(id, message) {
       return store.recognitionStatus.getItem(id)
