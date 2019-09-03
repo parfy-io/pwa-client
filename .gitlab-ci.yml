@@ -1,0 +1,20 @@
+image: rainu/docker-node:11-alpine
+
+stages:
+  - test
+  - build
+
+testAndBuild:
+  stage: test
+  script:
+    - npm install
+    - npm run build
+
+dockerrize:
+  image: docker
+  stage: build
+  script:
+    - docker build . -t docker-repo.raysha.de/parfy-pwa-client
+    - docker push docker-repo.raysha.de/parfy-pwa-client
+  only:
+    - master

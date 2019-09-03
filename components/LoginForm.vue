@@ -4,7 +4,7 @@
       <v-text-field
         :label="$t('login.mqttBroker')"
         prepend-icon="cloud"
-        placeholder="mqtt://parfy.io:1833"
+        placeholder="wss://parfy.io/mqtt"
         type="text"
         v-model="broker"
         :rules="ruleRequired"
