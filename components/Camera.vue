@@ -41,7 +41,7 @@
               <v-icon>settings</v-icon>
             </v-btn>
           </template>
-          <v-list shaped disabled dense>
+          <v-list shaped dense>
             <v-subheader> {{$t('component.camera.settings.device')}} </v-subheader>
 
             <v-list-item-group v-model="deviceId" color="primary">
