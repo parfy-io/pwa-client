@@ -87,7 +87,7 @@
 
 <script>
 import Recognition from "../../components/Recognition";
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {Recognition},
@@ -118,8 +118,8 @@ export default {
     },
   },
   methods:{
-    ...mapMutations({
-      removeRecognition: 'recognition/removeRecognition'
+    ...mapActions({
+      removeRecognition: 'recognition/removeAndSaveRecognition'
     }),
     uploaded(recognition){
       //if we have a recognition -> we uploaded it successfully

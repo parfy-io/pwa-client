@@ -27,7 +27,7 @@
 
 <script>
 import Camera from "../../components/Camera";
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import uuid4 from 'uuid4'
 
 export default {
@@ -39,7 +39,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations({
+    ...mapActions({
       initRecognition: 'recognition/initRecognition'
     }),
     newImage(image) {

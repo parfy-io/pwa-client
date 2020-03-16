@@ -8,29 +8,16 @@ export const mutations = {
   loadRecognition(state, recognition) {
     state.recognitions.push(recognition)
   },
-  initRecognition(state, {correlationId, image}) {
-    state.recognitions.push({
-      correlationId: correlationId,
-      image: image,
-      status: []
-    })
-
-    this.$localStore.addRecognition(correlationId, image)
-  },
   addRecognitionStatus(state, {correlationId, message}) {
     let recognition = state.recognitions.filter(r => r.correlationId === correlationId)
-    if(recognition && recognition.length > 0) {
+    if (recognition && recognition.length > 0) {
       recognition = recognition[0]
       recognition.status.push(message)
     }
-
-    this.$localStore.addRecognitionStatus(correlationId, message)
   },
   removeRecognition(state, correlationId) {
     let index = state.recognitions.findIndex(r => r.correlationId === correlationId)
     state.recognitions.splice(index, 1)
-
-    this.$localStore.removeRecognition(correlationId)
   }
 }
 
@@ -52,6 +39,28 @@ const actions = {
         }
       })
   },
+
+  initRecognition(ctx, {correlationId, image}) {
+    ctx.commit('loadRecognition', {
+      correlationId: correlationId,
+      image: image,
+      status: []
+    })
+
+    return this.$localStore.addRecognition(correlationId, image)
+  },
+
+  addAndSaveRecognitionStatus(ctx, {correlationId, message}) {
+    ctx.commit('addRecognitionStatus', {correlationId, message})
+
+    return this.$localStore.addRecognitionStatus(correlationId, message)
+  },
+
+  removeAndSaveRecognition(ctx, correlationId) {
+    ctx.commit('removeRecognition', correlationId)
+
+    return this.$localStore.removeRecognition(correlationId)
+  }
 }
 
 export default {

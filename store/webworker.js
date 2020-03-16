@@ -23,8 +23,7 @@ const actions = {
         ctx.commit('mqtt/setConnectionState', event.value, {root: true})
         break
       case 'status':
-        ctx.commit('recognition/addRecognitionStatus', event.value, {root: true})
-        break
+        return ctx.dispatch('recognition/addAndSaveRecognitionStatus', event.value, {root: true})
     }
   }
 }
