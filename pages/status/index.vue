@@ -4,7 +4,7 @@
     justify-center
   >
     <v-flex xs12>
-      <Recognition v-for="recognition in filteredRecognitions"
+      <Recognition v-for="recognition in reversedFilteredRecognitions"
                    :key="recognition.correlationId"
                    :image="recognition.image"
                    :correlationId="recognition.correlationId"
@@ -111,6 +111,9 @@ export default {
 
         return true
       })
+    },
+    reversedFilteredRecognitions(){
+      return this.filteredRecognitions.reverse()
     },
     changedFilter() {
       return !this.search.fail ||
