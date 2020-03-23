@@ -1,5 +1,8 @@
 //this is not a vuex-store! but a file for our localforage store
 import localforage from 'localforage'
+import AsyncLock from 'async-lock'
+
+const recognitionStatusLock = new AsyncLock()
 
 export function newLocalStore() {
   const store = {
@@ -50,15 +53,17 @@ export function newLocalStore() {
       ])
     },
     addRecognitionStatus(id, message) {
-      return store.recognitionStatus.getItem(id)
-        .then(status => {
-          let newStatus = []
-          if(status) {
-            newStatus = status
-          }
-          newStatus.push(message)
-          return store.recognitionStatus.setItem(id, newStatus)
-        })
+      //here we need this lock mechanism!
+      return recognitionStatusLock.acquire('addRecognitionStatus', () => {
+        return store.recognitionStatus.getItem(id)
+          .then(status => {
+            let newStatus = []
+            if(status) newStatus = status.slice()
+
+            newStatus.push(message)
+            return store.recognitionStatus.setItem(id, newStatus)
+          })
+      })
     },
     getRecognition(id) {
       return Promise.all([
