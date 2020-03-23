@@ -1,9 +1,31 @@
 import colors from 'vuetify/es5/util/colors'
 
+// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/pwa-client/',
+    middleware: ['configuration']
+  }
+} : {
+  router: {
+    base: '/',
+    middleware: ['configuration']
+  }
+}
+
 export default {
+  ...routerBase,
+
   mode: 'spa',
 
+  generate: {
+    dir: 'docs'
+  },
+
   env: {
+    version: process.env.npm_package_version,
+    builtDate: new Date(),
+    revision: process.env.COMMIT_HASH || 'development',
     mqtt: {
       topic: {
         out: process.env.MQTT_TOPIC_OUT || 'recognize/__CLIENT_ID__/__CORRELATION_ID__',
@@ -45,10 +67,6 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#d0b48a' },
-
-  router: {
-    middleware: ['configuration']
-  },
 
   /*
   ** Global CSS
