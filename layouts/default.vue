@@ -31,14 +31,14 @@
       </v-system-bar>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
       >
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
