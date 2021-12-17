@@ -1,6 +1,6 @@
 {
   "name": "pwa-client",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "The progressive web app for parfy.io",
   "author": "rainu",
   "private": true,
